@@ -25,7 +25,7 @@ paths:
     x-swagger-router-controller: thingController
     get:
       description: Returns a list of things
-      operationId: getThings
+      operationId: getThingsArray
       produces:
         - application/json
         - application/xml
@@ -74,7 +74,9 @@ paths:
         '200':
           description: Created a new thing.
           schema:
-            $ref: '#/definitions/thing'
+            type: object
+            items:
+              $ref: '#/definitions/thing'
         default:
           description: Create thing error
           schema:
@@ -128,15 +130,13 @@ definitions:
       - longitude
     properties:
       id:
-        type: integer
-        format: int64
+        type: string
       name:
         type: string
       description:
         type: string
       ownerId:
-        type: integer
-        format: int64
+        type: string
       latitude:
         type: number
       longitude:
@@ -155,8 +155,7 @@ definitions:
       description:
         type: string
       ownerId:
-        type: integer
-        format: int64
+        type: string
       latitude:
         type: number
       longitude:
