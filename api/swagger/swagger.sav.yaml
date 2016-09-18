@@ -33,7 +33,7 @@ paths:
       parameters:
         - name: thingId
           in: query
-          description: Thing Id of a part.
+          description: Thing containing a part.
           required: true
           type: string
       responses:
@@ -130,25 +130,6 @@ paths:
           description: Create thing error
           schema:
             $ref: '#/definitions/Error'
-  /thing/{id}:
-    x-swagger-router-controller: thingController
-    get:
-      description: Returns a thing
-      operationId: getThing
-      parameters:
-        - name: id
-          type: string
-          in: path
-          required: true
-      responses:
-        "200":
-          description: Gets a thing.
-          schema:
-            $ref: "#/definitions/thing"
-        default:
-          description: Thing Error
-          schema:
-            $ref: "#/definitions/Error"
   /hello:
     # binds a127 app logic to a route
     x-swagger-router-controller: hello_world
@@ -195,34 +176,22 @@ definitions:
     properties:
       _id:
         type: string
-        description: Id of a part.
       name:
         type: string
-        description: Name of a part.
       description:
         type: string
-        description: Description a part.
       thingId:
         type: string
-        description: Thing Id of a part.
       personId:
         type: string
-        description: User Id of a part.
       latitude:
         type: number
-        description: Latitude of a location.
       longitude:
         type: number
-        description: Longitude of a location.
       image:
         type: string
-        description: Image URI for a part.
       category:
-        type: string
-        description: Category of part.
-      altId:
-        type: string
-        description: Alternate id of a part.
+        type: string        
   newPart:
     type: object
     required:
@@ -232,31 +201,20 @@ definitions:
     properties:
       name:
         type: string
-        description: Name of a part.
       description:
         type: string
-        description: Description of a part.
       thingId:
         type: string
-        description: Thing Id of a part.
       personId:
         type: string
-        description: User Id of a part.
       latitude:
         type: number
-        description: Latitude of a location.
       longitude:
         type: number
-        description: Longitude of a location.
       image:
         type: string
-        description: Image URI for a part.
       category:
         type: string          
-        description: Category of a part.
-      altId:
-        type: string
-        description: Alternate Id of a part.
   thing:
     type: object
     required:
@@ -268,31 +226,20 @@ definitions:
     properties:
       _id:
         type: string
-        description: Id of a thing.
       name:
         type: string
-        description: Name of a thing.
       description:
         type: string
-        description: Description of a thing.
       personId:
         type: string
-        description: Person Id of a thing.
       latitude:
         type: number
-        description: Latitude of a location.
       longitude:
         type: number
-        description: Longitude of a location.
       image:
         type: string
-        description: Image URI of a thing.
       category:
-        type: string  
-        description: Category of a thing.
-      altId:
-        type: string
-        description: Alternate Id of a thing.
+        type: string          
   newThing:
     type: object
     required:
@@ -304,25 +251,15 @@ definitions:
     properties:
       name:
         type: string
-        description: Name of a thing.
       description:
         type: string
-        description: Description a thing.
       personId:
         type: string
-        description: User Id of a thing.
       latitude:
         type: number
-        description: Latitude of a location.
       longitude:
         type: number
-        description: Longitude of a location.
       image:
         type: string
-        description: Image avatar for a thing.
       category:
-        type: string
-        description: Category of thing.
-      altId:
-        type: string
-        description: Alternate Id of a thing.
+        type: string          

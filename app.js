@@ -2,6 +2,11 @@
 
 var SwaggerExpress = require('swagger-express-mw');
 var app = require('express')();
+var mongoose = require('mongoose');
+var config = require('./config/config');
+mongoose.connect(config.mongoUrl);
+
+app.set('json spaces', 2); // pretty print
 module.exports = app; // for testing
 
 var config = {
