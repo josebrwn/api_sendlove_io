@@ -47,6 +47,48 @@ paths:
           description: Message error
           schema:
             $ref: "#/definitions/Error"
+    post:
+      description: Creates a new message.
+      operationId: addMessage
+      produces:
+        - application/json
+      parameters:
+        - name: message
+          in: body
+          description: Message to be added.
+          required: true
+          schema:
+            $ref: '#/definitions/newMessage'
+      responses:
+        '200':
+          description: Created a new message.
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/message'
+        default:
+          description: Create message error
+          schema:
+            $ref: '#/definitions/Error'
+  /message/{id}:
+    x-swagger-router-controller: messageController
+    get:
+      description: Returns a message
+      operationId: getMessage
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Gets a message.
+          schema:
+            $ref: "#/definitions/message"
+        default:
+          description: Message Error
+          schema:
+            $ref: "#/definitions/Error"            
   /part:
     x-swagger-router-controller: partController
     get:
