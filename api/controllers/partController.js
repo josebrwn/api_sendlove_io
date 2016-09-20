@@ -30,6 +30,7 @@ function getPart(req, res) {
 
 function getPartsArray(req, res) {
   var thingId = req.swagger.params.thingId.value;
+  if (!mongoose.Types.ObjectId.isValid(thingId)) throw Error("Oh noes! That doesn't appear to be a valid id.");
   Parts.find(
     {
       $or:

@@ -20,6 +20,33 @@ produces:
 paths:
   /swagger:
     x-swagger-pipe: swagger_raw
+  /message:
+    x-swagger-router-controller: messageController
+    get:
+      description: Returns a list of messages
+      operationId: getMessagesArray
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
+        - text/html
+      parameters:
+        - name: partId
+          in: query
+          description: Part Id of a message.
+          required: true
+          type: string
+      responses:
+        "200": 
+          description: An array of messages.
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/message"
+        default:
+          description: Message error
+          schema:
+            $ref: "#/definitions/Error"
   /part:
     x-swagger-router-controller: partController
     get:
@@ -206,6 +233,76 @@ definitions:
     properties:
       message:
         type: string
+  message:
+    type: object
+    required:
+      - name
+      - description
+    properties:
+      _id:
+        type: string
+        description: Id of a message.
+      name:
+        type: string
+        description: Name of a message.
+      description:
+        type: string
+        description: Description a message.
+      partId:
+        type: string
+        description: Thing Id of a message.
+      personId:
+        type: string
+        description: User Id of a message.
+      latitude:
+        type: number
+        description: Latitude of a location.
+      longitude:
+        type: number
+        description: Longitude of a location.
+      image:
+        type: string
+        description: Image URI for a message.
+      category:
+        type: string
+        description: Category of message.
+      altId:
+        type: string
+        description: Alternate id of a message.
+  newMessage:
+    type: object
+    required:
+      - name
+      - description
+      - personId
+    properties:
+      name:
+        type: string
+        description: Name of a message.
+      description:
+        type: string
+        description: Description of a message.
+      partId:
+        type: string
+        description: Thing Id of a message.
+      personId:
+        type: string
+        description: User Id of a message.
+      latitude:
+        type: number
+        description: Latitude of a location.
+      longitude:
+        type: number
+        description: Longitude of a location.
+      image:
+        type: string
+        description: Image URL for a message.
+      category:
+        type: string          
+        description: Category of a message.
+      altId:
+        type: string
+        description: Alternate Id of a message.
   part:
     type: object
     required:
