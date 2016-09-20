@@ -14,11 +14,12 @@ module.exports = {
   getThing, getThingsArray, addThing
 };
 
-function getThing(req, res, next) {
+function getThing(req, res) {
   var id = req.swagger.params.id.value; //req.swagger contains the path parameters
+  if (!mongoose.Types.ObjectId.isValid(id)) throw Error("Oh noes! That doesn't appear to be a valid id."); //TODO 404
   Things.findById(
-    {'_id': id}
-    , 'id name description thingId personId latitude longitude image category altId parts'
+    id
+    , 'id name description thingId personId latitude longitude image category altId'
     , function(err, obj) {
       if (err) throw err;
       console.log(obj);

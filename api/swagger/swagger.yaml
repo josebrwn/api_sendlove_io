@@ -70,6 +70,25 @@ paths:
           description: Create part error
           schema:
             $ref: '#/definitions/Error'
+  /part/{id}:
+    x-swagger-router-controller: partController
+    get:
+      description: Returns a part
+      operationId: getPart
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Gets a part.
+          schema:
+            $ref: "#/definitions/part"
+        default:
+          description: Part Error
+          schema:
+            $ref: "#/definitions/Error"            
   /thing:
     x-swagger-router-controller: thingController
     get:
