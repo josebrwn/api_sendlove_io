@@ -1,19 +1,22 @@
-// things.js
-// fields: name, description, personId, latitude, longitude, image, category, altId
-// schemas: parts (which have messages), tags
+// messages.js
+// fields: name, description, partId, personId, latitude, longitude, image, category, altId
+// schemas: (tbd) messages, tags
 
 var config = require('../config/config');
 var mongoose = require('mongoose');
-// var partSchema = require('./parts');
-
 Schema = mongoose.Schema;
 
-var thingSchema = new Schema({
+
+var messageSchema = new Schema({
     name: {
       type: String,
       required: true
     },
     description: {
+      type: String,
+      required: true
+    },
+    partId: {
       type: String,
       required: true
     },
@@ -23,11 +26,11 @@ var thingSchema = new Schema({
     },
     latitude: {
       type: Number,
-      required: true
+      required: false
     },
     longitude: {
       type: Number,
-      required: true
+      required: false
     },
     image: {
       type: String,
@@ -40,8 +43,7 @@ var thingSchema = new Schema({
     altId: {
       type: String,
       required: false
-    },
-    // parts:[partSchema]
+    }
   }
 
   , {
@@ -49,16 +51,15 @@ var thingSchema = new Schema({
   }
 
 );
-thingSchema.index({
+messageSchema.index({
   personId: 1
 });
-thingSchema.index({
+messageSchema.index({
+  partId: 1
+});
+messageSchema.index({
   altId: 1
 });
 
-
-// the schema is useless so far
-// we need to create a model using it
-var Things = mongoose.model('Things', thingSchema);
-// make this available to our Node applications
-module.exports = Things;
+var Messages = mongoose.model('Messages', messageSchema);
+module.exports = Messages;

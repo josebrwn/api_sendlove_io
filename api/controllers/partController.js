@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var util = require('util');
 // tbd
-var bodyParser = require('body-parser');
+//var bodyParser = require('body-parser');
 //var Verify = require('./verify'); // TODO 
 
 var Parts = require('../../models/parts');
@@ -14,18 +14,33 @@ module.exports = {
   getPart, getPartsArray, addPart
 };
 
+function renderOne (req, res, id, fieldlist) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+      res.status(404)
+        .json("Oh noes! That doesn't appear to be a valid id.");
+  }
+  else {
+    Things.findById(
+      id
+      , fieldlist 
+      , function(err, obj) {
+        if (err) throw err;
+        if (obj) {
+          console.log(obj);
+          res.json(obj);
+        }
+        else {
+          res.status(404)
+            .json("Crikey! That doesn't appear to be a valid id.")
+        }
+      } 
+    );
+  }
+}
+
 function getPart(req, res) {
   var id = req.swagger.params.id.value; //req.swagger contains the path parameters
-  if (!mongoose.Types.ObjectId.isValid(id)) throw Error("Oh noes! That doesn't appear to be a valid id.");
-  Parts.findById(
-    id
-    , 'id name description thingId personId latitude longitude image category altId'
-    , function(err, obj) {
-      if (err) throw err;
-      console.log(obj);
-      res.json(obj); // this cast error crashes the server
-    } 
-  );
+  renderOne(req, res, id, "'id name description thingId personId latitude longitude image category altId'");
 }
 
 function getPartsArray(req, res) {

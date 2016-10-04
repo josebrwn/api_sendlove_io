@@ -302,9 +302,9 @@ definitions:
       longitude:
         type: number
         description: Longitude of a location.
-      image:
+      imagePath:
         type: string
-        description: Image URI for a message.
+        description: imagePath of a message.
       category:
         type: string
         description: Category of message.
@@ -336,9 +336,9 @@ definitions:
       longitude:
         type: number
         description: Longitude of a location.
-      image:
+      imagePath:
         type: string
-        description: Image URL for a message.
+        description: imagePath of a message.
       category:
         type: string          
         description: Category of a message.
@@ -372,9 +372,9 @@ definitions:
       longitude:
         type: number
         description: Longitude of a location.
-      image:
+      imagePath:
         type: string
-        description: Image URI for a part.
+        description: imagePath of a part.
       category:
         type: string
         description: Category of part.
@@ -406,9 +406,9 @@ definitions:
       longitude:
         type: number
         description: Longitude of a location.
-      image:
+      imagePath:
         type: string
-        description: Image URI for a part.
+        description: imagePath of a part.
       category:
         type: string          
         description: Category of a part.
@@ -442,9 +442,9 @@ definitions:
       longitude:
         type: number
         description: Longitude of a location.
-      image:
+      imagePath:
         type: string
-        description: Image URI of a thing.
+        description: imagePath of a thing.
       category:
         type: string  
         description: Category of a thing.
@@ -475,9 +475,9 @@ definitions:
       longitude:
         type: number
         description: Longitude of a location.
-      image:
+      imagePath:
         type: string
-        description: Image avatar for a thing.
+        description: imagePath of a thing.
       category:
         type: string
         description: Category of thing.
