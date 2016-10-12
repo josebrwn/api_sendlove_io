@@ -10,7 +10,7 @@ module.exports = {
   getThing, getThingsArray, addThing
 };
 
-function renderOne (req, res, id, fieldlist) {
+function renderOne (req, res, id, fieldList) {
   if (!mongoose.Types.ObjectId.isValid(id)) {
       res.status(404)
         .json("Oh noes! That doesn't appear to be a valid id.");
@@ -18,7 +18,7 @@ function renderOne (req, res, id, fieldlist) {
   else {
     Things.findById(
       id
-      , fieldlist 
+      , fieldList 
       , function(err, obj) {
         if (err) throw err;
         if (obj) {
@@ -34,33 +34,45 @@ function renderOne (req, res, id, fieldlist) {
   }
 }
 
+function renderArray (req, res, queryParams, fieldList) {
+  if (!true) {
+      res.status(404)
+        .json("Oh noes! That doesn't appear to be a valid search.");
+  }
+  else {
+    Things.find(
+      JSON.stringify(queryParams) // build a query object e.g. {colName: {$in: arrayNames}}
+      , fieldList 
+      , function(err, obj) {
+        if (err) throw err;
+        if (obj) {
+          console.log(obj);
+          res.json(obj);
+        }
+        else {
+          res.status(404)
+            .json("Crikey! I can't find a thing.")
+        }
+      } 
+    );
+  }
+}
+
 function getThing(req, res) {
   var id = req.swagger.params.id.value; //req.swagger contains the path parameters
   renderOne(req, res, id, "'id name description thingId personId latitude longitude image category altId'");
 }
 
-/* getThingsArray will need many overrides: searching from the map, for a person, a cause, etc. */
+/* getThingsArray will need many flavors: searching from the map, for a person, a cause, etc. */
 function getThingsArray(req, res) {
   var personId = req.swagger.params.personId.value; //TODO: default to user's own Id.
-  Things.find(
-    {}
-    , 'id name description thingId personId latitude longitude image category altId'
-    , function(err, obj) {
-      if (err) throw err;
-      if (obj) {
-        console.log(obj);
-        res.json(obj);
-      }
-      else {
-        res.status(404)
-          .json("Crikey! That doesn't appear to be a valid id.")
-      }
-    } 
-  );
+  renderArray(req, res, personId, "'id name description thingId personId latitude longitude image category altId'");
 }
 
 function addThing (req, res) {
-  Things.create(JSON.parse(req.body), function(err, obj) {
+  var newThing = JSON.parse(req.body); // TypeError 
+  console.log(req.body);
+  Things.create(newThing, function(err, obj) { 
     if (err) throw err;
       if (obj) {
         console.log(obj);
@@ -70,7 +82,7 @@ function addThing (req, res) {
       }
       else {
         res.status(500)
-          .json("Weird Mongoose error, probably.")
+          .json("This should not be happening.")
       }
   });
 }  
