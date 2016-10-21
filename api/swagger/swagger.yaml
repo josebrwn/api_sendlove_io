@@ -58,18 +58,18 @@ paths:
           description: Message to be added.
           required: true
           schema:
-            $ref: '#/definitions/newMessage'
+            $ref: "#/definitions/newMessage"
       responses:
-        '200':
+        "200":
           description: Created a new message.
           schema:
             type: object
             items:
-              $ref: '#/definitions/message'
+              $ref: "#/definitions/message"
         default:
           description: Create message error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
   /message/{id}:
     x-swagger-router-controller: messageController
     get:
@@ -127,18 +127,18 @@ paths:
           description: Part to be added.
           required: true
           schema:
-            $ref: '#/definitions/newPart'
+            $ref: "#/definitions/newPart"
       responses:
-        '200':
+        "200":
           description: Created a new part.
           schema:
             type: object
             items:
-              $ref: '#/definitions/part'
+              $ref: "#/definitions/part"
         default:
           description: Create part error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
   /part/{id}:
     x-swagger-router-controller: partController
     get:
@@ -206,18 +206,18 @@ paths:
           description: Thing to be added.
           required: true
           schema:
-            $ref: '#/definitions/newThing'
+            $ref: "#/definitions/newThing"
       responses:
-        '200':
+        "200":
           description: Created a new thing.
           schema:
             type: object
             items:
-              $ref: '#/definitions/thing'
+              $ref: "#/definitions/thing"
         default:
           description: Create thing error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
   /thing/{id}:
     x-swagger-router-controller: thingController
     get:
@@ -241,7 +241,7 @@ paths:
     # binds a127 app logic to a route
     x-swagger-router-controller: hello_world
     get:
-      description: Returns 'Hello' to the caller
+      description: Returns "Hello" to the caller
       # used as the method name of the controller
       operationId: hello
       parameters:
