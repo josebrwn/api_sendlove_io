@@ -46,7 +46,7 @@ function renderArray (req, res, queryParams, fieldList) {
       , function(err, obj) {
         if (err) throw err;
         if (obj) {
-          console.log(obj);
+          // console.log(obj);
           res.json(obj);
         }
         else {
