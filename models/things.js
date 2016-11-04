@@ -29,7 +29,7 @@ var thingSchema = new Schema({
       type: Number,
       required: true
     },
-    image: {
+    imagePath: {
       type: String,
       required: false
     },

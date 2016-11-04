@@ -60,13 +60,13 @@ function renderArray (req, res, queryParams, fieldList) {
 
 function getThing(req, res) {
   var id = req.swagger.params.id.value; //req.swagger contains the path parameters
-  renderOne(req, res, id, "'id name description thingId personId latitude longitude image category altId'");
+  renderOne(req, res, id, "'id name description thingId personId latitude longitude imagePath category altId'");
 }
 
 /* getThingsArray will need many flavors: searching from the map, for a person, a cause, etc. */
 function getThingsArray(req, res) {
   var personId = req.swagger.params.personId.value; //TODO: default to user's own Id.
-  renderArray(req, res, personId, "'id name description thingId personId latitude longitude image category altId'");
+  renderArray(req, res, personId, "'id name description thingId personId latitude longitude imagePath category altId'");
 }
 
 function addThing (req, res) {
@@ -77,7 +77,6 @@ function addThing (req, res) {
       if (obj) {
         console.log(obj);
         var id = obj._id;
-        console.log("created thing id: " + id);
         res.json(obj);
       }
       else {

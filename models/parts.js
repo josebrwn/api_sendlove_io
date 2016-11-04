@@ -32,7 +32,7 @@ var partSchema = new Schema({
       type: Number,
       required: false
     },
-    image: {
+    imagePath: {
       type: String,
       required: false
     },
