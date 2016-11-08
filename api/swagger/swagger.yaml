@@ -184,6 +184,11 @@ paths:
           description: Person of a thing.
           required: false
           type: string
+        - name: category
+          in: query
+          description: Category of a thing.
+          required: false
+          type: string
       responses:
         "200": 
           description: An array of things.

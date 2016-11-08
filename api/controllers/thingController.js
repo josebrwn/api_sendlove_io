@@ -40,8 +40,9 @@ function renderArray (req, res, queryParams, fieldList) {
         .json("Oh noes! That doesn't appear to be a valid search.");
   }
   else {
+    console.log(JSON.stringify(queryParams));
     Things.find(
-      JSON.stringify(queryParams) // build a query object e.g. {colName: {$in: arrayNames}}
+      queryParams // build a query object e.g. {colName: {$in: arrayNames}}
       , fieldList 
       , function(err, obj) {
         if (err) throw err;
@@ -54,7 +55,7 @@ function renderArray (req, res, queryParams, fieldList) {
             .json("Crikey! I can't find a thing.")
         }
       } 
-    );
+    ).sort( { _id: 1 } );
   }
 }
 
@@ -65,8 +66,13 @@ function getThing(req, res) {
 
 /* getThingsArray will need many flavors: searching from the map, for a person, a cause, etc. */
 function getThingsArray(req, res) {
-  var personId = req.swagger.params.personId.value; //TODO: default to user's own Id.
-  renderArray(req, res, personId, "'id name description thingId personId latitude longitude imagePath category altId'");
+  if (req.swagger.params.category.value != undefined) { // TODO loop through each key and value in the querystring.
+    var queryString = {};
+    queryString[ 'category'] = {'$in' : req.swagger.params.category.value};;
+    console.log("the problem is " + req.swagger.params.category.value)
+  }
+  console.log(queryString);
+  renderArray(req, res, queryString, "'id name description thingId personId latitude longitude imagePath category altId'");
 }
 
 function addThing (req, res) {
