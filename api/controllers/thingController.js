@@ -40,7 +40,7 @@ function renderArray (req, res, queryParams, fieldList) {
         .json("Oh noes! That doesn't appear to be a valid search.");
   }
   else {
-    console.log(JSON.stringify(queryParams));
+    // console.log(JSON.stringify(queryParams));
     Things.find(
       queryParams // build a query object e.g. {colName: {$in: arrayNames}}
       , fieldList 
@@ -69,8 +69,8 @@ function getThingsArray(req, res) {
   if (req.swagger.params.category.value != undefined) { // TODO loop through each key and value in the querystring.
     var queryString = {};
     queryString['category'] = {'$regex' : req.swagger.params.category.value }; 
+    // console.log(queryString);    
   }
-  console.log(queryString);
   renderArray(req, res, queryString, "'id name description thingId personId latitude longitude imagePath category altId'");
 }
 
