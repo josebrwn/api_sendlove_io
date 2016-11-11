@@ -68,7 +68,7 @@ function getThing(req, res) {
 function getThingsArray(req, res) {
   if (req.swagger.params.category.value != undefined) { // TODO loop through each key and value in the querystring.
     var queryString = {};
-    queryString['category'] = {'$regex' : req.swagger.params.category.value }; 
+    queryString['category'] = {'$regex' : req.swagger.params.category.value ,$options:'$i'}; 
     // console.log(queryString);    
   }
   renderArray(req, res, queryString, "'id name description thingId personId latitude longitude imagePath category altId'");
