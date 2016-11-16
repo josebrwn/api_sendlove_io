@@ -41,7 +41,18 @@ var thingSchema = new Schema({
       type: String,
       required: false
     },
-    // parts:[partSchema]
+    thingType: {
+      type: String,
+      required: false
+    },
+    nValue: {
+      type: Number,
+      required: false
+    },
+    sValue: {
+      type: String,
+      required: false
+    }
   }
 
   , {

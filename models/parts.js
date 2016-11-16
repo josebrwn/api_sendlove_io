@@ -10,11 +10,11 @@ Schema = mongoose.Schema;
 var partSchema = new Schema({
     name: {
       type: String,
-      required: true
+      required: false
     },
     description: {
       type: String,
-      required: true
+      required: false
     },
     thingId: {
       type: String,
@@ -41,6 +41,18 @@ var partSchema = new Schema({
       required: false
     },
     altId: {
+      type: String,
+      required: false
+    },
+    partType: {
+      type: String,
+      required: false
+    },
+    nValue: {
+      type: Number,
+      required: false
+    },
+    sValue: {
       type: String,
       required: false
     }

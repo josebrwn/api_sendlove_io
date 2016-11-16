@@ -40,7 +40,7 @@ function renderOne (req, res, id, fieldlist) {
 
 function getPart(req, res) {
   var id = req.swagger.params.id.value; //req.swagger contains the path parameters
-  renderOne(req, res, id, "'id name description thingId personId latitude longitude image category altId'");
+  renderOne(req, res, id, "'id name description thingId personId latitude longitude image category altId partType nValue sValue'");
 }
 
 function getPartsArray(req, res) {
@@ -53,7 +53,7 @@ function getPartsArray(req, res) {
         {'thingId':thingId}
       ]    
     }
-    , 'id name description thingId personId latitude longitude image category altId'
+    , 'id name description thingId personId latitude longitude image category altId partType nValue sValue'
     , function(err, obj) {
       if (err) throw err;
       console.log(obj);
@@ -63,10 +63,20 @@ function getPartsArray(req, res) {
 }
 
 function addPart (req, res) {
-  Parts.create(req.body, function(err, obj) {
-      if (err) throw err;
-      var id = obj._id;
-      console.log("created part id: " + id);
-      res.json(obj);
+
+  var newPart = JSON.parse(req.body); 
+  console.log(req.body);
+  Parts.create(newPart, function(err, obj) { 
+    if (err) throw err;
+      if (obj) {
+        console.log(obj);
+        var id = obj._id;
+        res.json(obj);
+      }
+      else {
+        res.status(500)
+          .json("This should not be happening.")
+      }
   });
+
 }  

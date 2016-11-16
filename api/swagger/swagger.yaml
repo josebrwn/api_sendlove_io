@@ -34,7 +34,12 @@ paths:
         - name: partId
           in: query
           description: Part Id of a message.
-          required: true
+          required: false
+          type: string
+        - name: thingtId
+          in: query
+          description: Thing Id of a message.
+          required: false
           type: string
       responses:
         "200": 
@@ -169,16 +174,17 @@ paths:
         - text/xml
         - text/html
       parameters:
-        - name: latitude
-          in: query
-          description: Latitude of a location.
-          required: false
-          type: number
-        - name: longitude
-          in: query
-          description: Longitude of a location.
-          required: false
-          type: number
+#        - name: latitude
+#          in: query
+#          description: Latitude of a location.
+#          required: false
+#          type: number
+#        - name: longitude
+#          in: query
+#          description: Longitude of a location.
+#          required: false
+#          type: number
+# TODO create a ThingLocation table for geography searches
         - name: personId
           in: query
           description: Person of a thing.
@@ -297,6 +303,9 @@ definitions:
         description: Description a message.
       partId:
         type: string
+        description: Part Id of a message.
+      thingtId:
+        type: string
         description: Thing Id of a message.
       personId:
         type: string
@@ -316,6 +325,15 @@ definitions:
       altId:
         type: string
         description: Alternate id of a message.
+      messageType:
+        type: string
+        description: Type of a message.
+      nValue:
+        type: number
+        description: Number value of a message.
+      sValue:
+        type: string
+        description: String value of a message.
   newMessage:
     type: object
     required:
@@ -330,6 +348,9 @@ definitions:
         type: string
         description: Description of a message.
       partId:
+        type: string
+        description: Part Id of a message.
+      thingtId:
         type: string
         description: Thing Id of a message.
       personId:
@@ -350,11 +371,20 @@ definitions:
       altId:
         type: string
         description: Alternate Id of a message.
+      messageType:
+        type: string
+        description: Type of a message.
+      nValue:
+        type: number
+        description: Number value of a message.
+      sValue:
+        type: string
+        description: String value of a message.        
   part:
     type: object
     required:
-      - name
-      - description
+      - thingId
+      - personId
     properties:
       _id:
         type: string
@@ -386,11 +416,19 @@ definitions:
       altId:
         type: string
         description: Alternate id of a part.
+      partType:
+        type: string
+        description: Type of a part.
+      nValue:
+        type: number
+        description: Number value of a part.
+      sValue:
+        type: string
+        description: String value of a part.
   newPart:
     type: object
     required:
-      - name
-      - description
+      - thingId
       - personId
     properties:
       name:
@@ -420,6 +458,15 @@ definitions:
       altId:
         type: string
         description: Alternate Id of a part.
+      partType:
+        type: string
+        description: Type of a part.
+      nValue:
+        type: number
+        description: Number value of a part.
+      sValue:
+        type: string
+        description: String value of a part.
   thing:
     type: object
     required:
@@ -456,6 +503,15 @@ definitions:
       altId:
         type: string
         description: Alternate Id of a thing.
+      thingType:
+        type: string
+        description: Type of a thing.
+      nValue:
+        type: number
+        description: Number value of a thing.
+      sValue:
+        type: string
+        description: String value of a thing.
   newThing:
     type: object
     required:
@@ -489,3 +545,12 @@ definitions:
       altId:
         type: string
         description: Alternate Id of a thing.
+      thingType:
+        type: string
+        description: Type of a thing.
+      nValue:
+        type: number
+        description: Number value of a thing.
+      sValue:
+        type: string
+        description: String value of a thing.        

@@ -75,7 +75,7 @@ function getThingsArray(req, res) {
 }
 
 function addThing (req, res) {
-  var newThing = JSON.parse(req.body); // TypeError 
+  var newThing = JSON.parse(req.body); 
   console.log(req.body);
   Things.create(newThing, function(err, obj) { 
     if (err) throw err;
