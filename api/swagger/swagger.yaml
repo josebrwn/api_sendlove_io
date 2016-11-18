@@ -110,6 +110,16 @@ paths:
           description: Thing Id of a part.
           required: true
           type: string
+        - name: personId
+          in: query
+          description: Person Id of a part.
+          required: false
+          type: string
+        - name: partType
+          in: query
+          description: partType of a part.
+          required: true
+          type: string
       responses:
         "200": 
           description: An array of parts.
