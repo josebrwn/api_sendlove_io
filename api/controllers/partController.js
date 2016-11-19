@@ -81,15 +81,15 @@ function renderArray (req, res, queryParams, fieldList) {
             }
             else {
               res.status(404)
-                .json("Crikey! I can't find a thing.")
+                .json("Crikey! I can't find a thing.") // TODO just return an empty 200
             }
           } 
         ).sort( { _id: 1 } ).limit(1);      
       } // like
       else {
         console.log('the personId is not valid');
-        res.status(404)
-          .json("invalid personId")
+        res.status(200)
+          .json([])
       }
     }
   }
