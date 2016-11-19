@@ -76,18 +76,16 @@ function getPart(req, res) {
 */
 function getPartsArray(req, res) {
   var queryString = {};
-  if (req.swagger.params.thingId != undefined) { // TODO loop through each key and value in the querystring.
+  if (req.swagger.params.thingId.value != undefined) { 
     queryString['thingId'] = req.swagger.params.thingId.value; 
   }
-  if (req.swagger.params.personId != undefined) { // TODO loop through each key and value in the querystring.
+  if (req.swagger.params.personId.value != undefined && 1==2) { 
     queryString['personId'] = req.swagger.params.personId.value; 
   }
-  if (req.swagger.params.partType != undefined) { // TODO loop through each key and value in the querystring.
+  if (req.swagger.params.partType.value != undefined) { 
     queryString['partType'] = req.swagger.params.partType.value; 
   }
-
-  console.log(queryString['thingId']);    
-  console.log(queryString['personId']);    
+  console.log(queryString)
   renderArray(req, res, queryString, "'id name description thingId personId latitude longitude imagePath category altId partType nValue sValue'");
 }
 
