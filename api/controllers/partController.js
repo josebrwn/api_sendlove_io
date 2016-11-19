@@ -45,21 +45,53 @@ function renderArray (req, res, queryParams, fieldList) {
   }
   else {
     // console.log(JSON.stringify(queryParams));
-    Parts.find(
-      queryParams // build a query object e.g. {colName: {$in: arrayNames}}
-      , fieldList 
-      , function(err, obj) {
-        if (err) throw err;
-        if (obj) {
-          // console.log(obj);
-          res.json(obj);
-        }
-        else {
-          res.status(404)
-            .json("Crikey! I can't find a thing.")
-        }
-      } 
-    ).sort( { _id: 1 } );
+    // KLUDGE - just need one record if the intention has been liked and don't need anything if personId is not present
+    if (queryParams['partType'] != "like") {
+      console.log("partType = like");
+      Parts.find(
+        queryParams // build a query object e.g. {colName: {$in: arrayNames}}
+        , fieldList 
+        , function(err, obj) {
+          if (err) throw err;
+          if (obj) {
+            console.log(obj);
+            res.json(obj);
+          }
+          else {
+            res.status(404)
+              .json("Crikey! I can't find a thing.")
+          }
+        } 
+      ).sort( { _id: 1 } );      
+    } // default 
+    else {
+      console.log('partType = like, attempting to validate personId');
+      console.log(queryParams['personId']);
+      
+      if (mongoose.Types.ObjectId.isValid(queryParams['personId'])) { // TODO validate all the other inputs and verify the API doesn't crash.
+        console.log("finding part");
+        Parts.find(
+          queryParams // build a query object e.g. {colName: {$in: arrayNames}}
+          , fieldList 
+          , function(err, obj) {
+            if (err) throw err;
+            if (obj) {
+              console.log(obj);
+              res.json(obj);
+            }
+            else {
+              res.status(404)
+                .json("Crikey! I can't find a thing.")
+            }
+          } 
+        ).sort( { _id: 1 } ).limit(1);      
+      } // like
+      else {
+        console.log('the personId is not valid');
+        res.status(404)
+          .json("invalid personId")
+      }
+    }
   }
 }
 
@@ -79,8 +111,10 @@ function getPartsArray(req, res) {
   if (req.swagger.params.thingId.value != undefined) { 
     queryString['thingId'] = req.swagger.params.thingId.value; 
   }
-  if (req.swagger.params.personId.value != undefined && 1==2) { 
-    queryString['personId'] = req.swagger.params.personId.value; 
+  if (req.swagger.params.personId.value != undefined ) { 
+    if (mongoose.Types.ObjectId.isValid(req.swagger.params.personId.value)) {
+      queryString['personId'] = req.swagger.params.personId.value; 
+    }
   }
   if (req.swagger.params.partType.value != undefined) { 
     queryString['partType'] = req.swagger.params.partType.value; 
