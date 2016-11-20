@@ -124,7 +124,7 @@ function getPartsArray(req, res) {
 
 function addPart (req, res) {
   var newPart = JSON.parse(req.body); 
-  console.log(req.body);
+  //console.log(req.body);
   Parts.create(newPart, function(err, obj) { 
     if (err) throw err;
       if (obj) {
