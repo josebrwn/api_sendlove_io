@@ -47,7 +47,7 @@ function renderArray (req, res, queryParams, fieldList) {
     // console.log(JSON.stringify(queryParams));
     // KLUDGE - just need one record if the intention has been liked and don't need anything if personId is not present
     if (queryParams['partType'] != "like") {
-      console.log("partType = like");
+      //console.log("partType != like");
       Parts.find(
         queryParams // build a query object e.g. {colName: {$in: arrayNames}}
         , fieldList 
@@ -65,11 +65,9 @@ function renderArray (req, res, queryParams, fieldList) {
       ).sort( { _id: 1 } );      
     } // default 
     else {
-      console.log('partType = like, attempting to validate personId');
-      console.log(queryParams['personId']);
-      
+      //console.log('partType = like, attempting to validate personId');
+      //console.log(queryParams['personId']);
       if (mongoose.Types.ObjectId.isValid(queryParams['personId'])) { // TODO validate all the other inputs and verify the API doesn't crash.
-        console.log("finding part");
         Parts.find(
           queryParams // build a query object e.g. {colName: {$in: arrayNames}}
           , fieldList 
@@ -124,7 +122,7 @@ function getPartsArray(req, res) {
 }
 
 function addPart (req, res) {
-
+  console.log('add part');
   var newPart = JSON.parse(req.body); 
   console.log(req.body);
   Parts.create(newPart, function(err, obj) { 
