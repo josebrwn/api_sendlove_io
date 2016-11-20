@@ -80,7 +80,7 @@ function addThing (req, res) {
   Things.create(newThing, function(err, obj) { 
     if (err) throw err;
       if (obj) {
-        console.log(obj);
+        //console.log(obj);
         var id = obj._id;
         res.json(obj);
       }

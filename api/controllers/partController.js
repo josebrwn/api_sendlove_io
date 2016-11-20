@@ -47,14 +47,16 @@ function renderArray (req, res, queryParams, fieldList) {
     // console.log(JSON.stringify(queryParams));
     // KLUDGE - just need one record if the intention has been liked and don't need anything if personId is not present
     if (queryParams['partType'] != "like") {
-      //console.log("partType != like");
+      
+      console.log(queryParams);
+      
       Parts.find(
         queryParams // build a query object e.g. {colName: {$in: arrayNames}}
         , fieldList 
         , function(err, obj) {
           if (err) throw err;
           if (obj) {
-            console.log(obj);
+            //console.log(obj);
             res.json(obj);
           }
           else {
@@ -62,11 +64,9 @@ function renderArray (req, res, queryParams, fieldList) {
               .json("Crikey! I can't find a thing.")
           }
         } 
-      ).sort( { _id: 1 } );      
+      ).sort( { _id: -1 } );      
     } // default 
     else {
-      //console.log('partType = like, attempting to validate personId');
-      //console.log(queryParams['personId']);
       if (mongoose.Types.ObjectId.isValid(queryParams['personId'])) { // TODO validate all the other inputs and verify the API doesn't crash.
         Parts.find(
           queryParams // build a query object e.g. {colName: {$in: arrayNames}}
@@ -74,7 +74,7 @@ function renderArray (req, res, queryParams, fieldList) {
           , function(err, obj) {
             if (err) throw err;
             if (obj) {
-              console.log(obj);
+              //console.log(obj);
               res.json(obj);
             }
             else {
@@ -98,6 +98,7 @@ function renderArray (req, res, queryParams, fieldList) {
 */
 function getPart(req, res) {
   var id = req.swagger.params.id.value; //req.swagger contains the path parameters
+  console.log(queryString);
   renderOne(req, res, id, "'id name description thingId personId latitude longitude image category altId partType nValue sValue'");
 }
 
@@ -117,18 +118,17 @@ function getPartsArray(req, res) {
   if (req.swagger.params.partType.value != undefined) { 
     queryString['partType'] = req.swagger.params.partType.value; 
   }
-  console.log(queryString)
+  //console.log(queryString);
   renderArray(req, res, queryString, "'id name description thingId personId latitude longitude imagePath category altId partType nValue sValue'");
 }
 
 function addPart (req, res) {
-  console.log('add part');
   var newPart = JSON.parse(req.body); 
   console.log(req.body);
   Parts.create(newPart, function(err, obj) { 
     if (err) throw err;
       if (obj) {
-        console.log(obj);
+        //console.log(obj);
         var id = obj._id;
         res.json(obj);
       }
