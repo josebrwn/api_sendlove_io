@@ -26,7 +26,7 @@ function renderOne (req, res, id, fieldlist) {
       , function(err, obj) {
         if (err) throw err;
         if (obj) {
-          console.log(obj);
+          //console.log(obj);
           res.json(obj);
         }
         else {
