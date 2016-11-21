@@ -38,58 +38,34 @@ function renderOne (req, res, id, fieldlist) {
   }
 }
 
+/*
+  it looks like there's a hack here. 
+  this returns res.json([]) opportunistically, when the person is not logged in.
+  
+*/
+
 function renderArray (req, res, queryParams, fieldList) {
   if (!true) {
       res.status(404)
         .json("Oh noes! That doesn't appear to be a valid search.");
   }
   else {
-    // console.log(JSON.stringify(queryParams));
-    // KLUDGE - just need one record if the intention has been liked and don't need anything if personId is not present
-    if (queryParams['partType'] != "like") {
-      
-      console.log(queryParams);
-      
-      Parts.find(
-        queryParams // build a query object e.g. {colName: {$in: arrayNames}}
-        , fieldList 
-        , function(err, obj) {
-          if (err) throw err;
-          if (obj) {
-            //console.log(obj);
-            res.json(obj);
-          }
-          else {
-            res.status(404)
-              .json("Crikey! I can't find a thing.")
-          }
-        } 
-      ).sort( { _id: -1 } );      
-    } // default 
-    else {
-      if (mongoose.Types.ObjectId.isValid(queryParams['personId'])) { // TODO validate all the other inputs and verify the API doesn't crash.
-        Parts.find(
-          queryParams // build a query object e.g. {colName: {$in: arrayNames}}
-          , fieldList 
-          , function(err, obj) {
-            if (err) throw err;
-            if (obj) {
-              //console.log(obj);
-              res.json(obj);
-            }
-            else {
-              res.status(404)
-                .json("Crikey! I can't find a thing.") // TODO just return an empty 200
-            }
-          } 
-        ).sort( { _id: 1 } ).limit(1);      
-      } // like
-      else {
-        console.log('the personId is not valid');
-        res.status(200)
-          .json([])
-      }
-    }
+    //console.log(JSON.stringify(queryParams));
+    Parts.find(
+      queryParams // build a query object e.g. {colName: {$in: arrayNames}}
+      , fieldList 
+      , function(err, obj) {
+        if (err) throw err;
+        if (obj) {
+          //console.log(obj);
+          res.json(obj);
+        }
+        else {
+          res.status(404)
+            .json("Crikey! I can't find a thing.")
+        }
+      } 
+    ).sort( { _id: -1 } );      
   }
 }
 
