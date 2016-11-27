@@ -23,11 +23,11 @@ var thingSchema = new Schema({
     },
     latitude: {
       type: Number,
-      required: true
+      required: false
     },
     longitude: {
       type: Number,
-      required: true
+      required: false
     },
     imagePath: {
       type: String,
