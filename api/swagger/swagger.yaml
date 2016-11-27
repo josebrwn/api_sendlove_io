@@ -483,8 +483,6 @@ definitions:
       - name
       - description
       - personId
-      - latitude
-      - longitude
     properties:
       _id:
         type: string
@@ -528,8 +526,6 @@ definitions:
       - name
       - description
       - personId
-      - latitude
-      - longitude
     properties:
       name:
         type: string
