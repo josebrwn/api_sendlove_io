@@ -49,10 +49,11 @@ function getMessagesArray(req, res) {
 }
 
 function addMessage (req, res) {
+  console.log(req.body); // this works either in curl or express because mongoose is not involved. KLUDGE TODO
   Messages.create(req.body, function(err, obj) {
       if (err) throw err;
       var id = obj._id;
-      console.log("created part id: " + id);
+      console.log("created message id: " + id);
       res.json(obj);
   });
 }  

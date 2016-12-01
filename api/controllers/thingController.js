@@ -2,7 +2,7 @@
 'use strict';
 var mongoose = require('mongoose');
 var util = require('util');
-//var bodyParser = require('body-parser');
+
 var Things = require('../../models/things');
 
 // Exports all the functions to perform on the db
@@ -75,8 +75,19 @@ function getThingsArray(req, res) {
 }
 
 function addThing (req, res) {
-  var newThing = JSON.parse(req.body); 
   console.log(req.body);
+  // in express you must pass json, in curl you must pass a string. KLUDGE
+  try {
+    // this only works in express
+    var newThing = JSON.parse(req.body);
+  }
+  catch (ex) {
+    // this only works in curl
+    var newThing = req.body;
+    console.error("inner", ex.message);
+  }
+
+  console.log(newThing);
   Things.create(newThing, function(err, obj) { 
     if (err) throw err;
       if (obj) {

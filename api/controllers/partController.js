@@ -99,8 +99,17 @@ function getPartsArray(req, res) {
 }
 
 function addPart (req, res) {
-  var newPart = JSON.parse(req.body); 
-  //console.log(req.body);
+  console.log(req.body);
+  // in express you must pass json, in curl you must pass a string. KLUDGE
+  try {
+    // this only works in express
+    var newPart = JSON.parse(req.body);
+  }
+  catch (ex) {
+    // this only works in curl
+    var newPart = req.body;
+    console.error("inner", ex.message);
+  }
   Parts.create(newPart, function(err, obj) { 
     if (err) throw err;
       if (obj) {
