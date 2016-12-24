@@ -22,7 +22,7 @@ function renderOne (req, res, id, fieldList) {
       , function(err, obj) {
         if (err) throw err;
         if (obj) {
-          //console.log(obj);
+          // console.log(obj);
           res.json(obj);
         }
         else {
@@ -48,6 +48,7 @@ function renderArray (req, res, queryParams, fieldList) {
         if (err) throw err;
         if (obj) {
           // console.log(obj);
+          console.log("rendered array");
           res.json(obj);
         }
         else {
@@ -61,6 +62,7 @@ function renderArray (req, res, queryParams, fieldList) {
 
 function getThing(req, res) {
   var id = req.swagger.params.id.value; //req.swagger contains the path parameters
+  console.log(id);
   renderOne(req, res, id, "'id name description thingId personId latitude longitude imagePath category altId'");
 }
 
@@ -75,7 +77,7 @@ function getThingsArray(req, res) {
 }
 
 function addThing (req, res) {
-  console.log(req.body);
+  // console.log(req.body);
   // in express you must pass json, in curl you must pass a string. KLUDGE
   try {
     // this only works in express
