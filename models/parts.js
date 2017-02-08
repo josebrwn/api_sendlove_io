@@ -17,11 +17,11 @@ var partSchema = new Schema({
       required: false
     },
     thingId: {
-      type: String,
+      type: Schema.Types.ObjectId,
       required: true
     },
     personId: {
-      type: String,
+      type: Schema.Types.ObjectId,
       required: true
     },
     latitude: {

@@ -18,7 +18,7 @@ var thingSchema = new Schema({
       required: true
     },
     personId: {
-      type: String,
+      type: Schema.Types.ObjectId,
       required: true
     },
     latitude: {

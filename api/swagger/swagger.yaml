@@ -4,9 +4,9 @@ info:
   title: SendLove I/O
 # during dev, should point to your local machine
 host: localhost:3000
-# basePath prefixes all resource paths 
+# basePath prefixes all resource paths
 basePath: /
-# 
+#
 schemes:
   # tip: remove http to make production-grade
   - http
@@ -36,13 +36,13 @@ paths:
           description: Part Id of a message.
           required: false
           type: string
-        - name: thingtId
+        - name: thingId
           in: query
           description: Thing Id of a message.
           required: false
           type: string
       responses:
-        "200": 
+        "200":
           description: An array of messages.
           schema:
             type: array
@@ -93,7 +93,7 @@ paths:
         default:
           description: Message Error
           schema:
-            $ref: "#/definitions/Error"            
+            $ref: "#/definitions/Error"
   /part:
     x-swagger-router-controller: partController
     get:
@@ -121,7 +121,7 @@ paths:
           required: true
           type: string
       responses:
-        "200": 
+        "200":
           description: An array of parts.
           schema:
             type: array
@@ -172,7 +172,7 @@ paths:
         default:
           description: Part Error
           schema:
-            $ref: "#/definitions/Error"            
+            $ref: "#/definitions/Error"
   /thing:
     x-swagger-router-controller: thingController
     get:
@@ -206,7 +206,7 @@ paths:
           required: false
           type: string
       responses:
-        "200": 
+        "200":
           description: An array of things.
           schema:
             type: array
@@ -376,7 +376,7 @@ definitions:
         type: string
         description: imagePath of a message.
       category:
-        type: string          
+        type: string
         description: Category of a message.
       altId:
         type: string
@@ -389,7 +389,7 @@ definitions:
         description: Number value of a message.
       sValue:
         type: string
-        description: String value of a message.        
+        description: String value of a message.
   part:
     type: object
     required:
@@ -463,7 +463,7 @@ definitions:
         type: string
         description: imagePath of a part.
       category:
-        type: string          
+        type: string
         description: Category of a part.
       altId:
         type: string
@@ -477,49 +477,6 @@ definitions:
       sValue:
         type: string
         description: String value of a part.
-  thing:
-    type: object
-    required:
-      - name
-      - description
-      - personId
-    properties:
-      _id:
-        type: string
-        description: Id of a thing.
-      name:
-        type: string
-        description: Name of a thing.
-      description:
-        type: string
-        description: Description of a thing.
-      personId:
-        type: string
-        description: Person Id of a thing.
-      latitude:
-        type: number
-        description: Latitude of a location.
-      longitude:
-        type: number
-        description: Longitude of a location.
-      imagePath:
-        type: string
-        description: imagePath of a thing.
-      category:
-        type: string  
-        description: Category of a thing.
-      altId:
-        type: string
-        description: Alternate Id of a thing.
-      thingType:
-        type: string
-        description: Type of a thing.
-      nValue:
-        type: number
-        description: Number value of a thing.
-      sValue:
-        type: string
-        description: String value of a thing.
   newThing:
     type: object
     required:
@@ -559,4 +516,50 @@ definitions:
         description: Number value of a thing.
       sValue:
         type: string
-        description: String value of a thing.        
+        description: String value of a thing.
+  thing:
+    type: object
+    required:
+      - name
+      - description
+      - personId
+    properties:
+      _id:
+        type: string
+        description: Id of a thing.
+      name:
+        type: string
+        description: Name of a thing.
+      description:
+        type: string
+        description: Description of a thing.
+      personId:
+        type: string
+        description: Person Id of a thing.
+      latitude:
+        type: number
+        description: Latitude of a location.
+      longitude:
+        type: number
+        description: Longitude of a location.
+      imagePath:
+        type: string
+        description: imagePath of a thing.
+      category:
+        type: string
+        description: Category of a thing.
+      altId:
+        type: string
+        description: Alternate Id of a thing.
+      thingType:
+        type: string
+        description: Type of a thing.
+      nValue:
+        type: number
+        description: Number value of a thing.
+      sValue:
+        type: string
+        description: String value of a thing.
+      updatedAt:
+        type: string
+        description: Timestamp value of a thing.

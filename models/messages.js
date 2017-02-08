@@ -17,11 +17,11 @@ var messageSchema = new Schema({
       required: true
     },
     partId: {
-      type: String,
+      type: Schema.Types.ObjectId,
       required: true
     },
     personId: {
-      type: String,
+      type: Schema.Types.ObjectId,
       required: true
     },
     latitude: {

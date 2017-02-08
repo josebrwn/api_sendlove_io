@@ -4,10 +4,9 @@ var mongoose = require('mongoose');
 var util = require('util');
 // tbd
 //var bodyParser = require('body-parser');
-//var Verify = require('./verify'); // TODO 
+//var Verify = require('./verify'); // TODO
 
 var Messages = require('../../models/messages');
-
 
 // Exports all the functions to perform on the db
 module.exports = {
@@ -25,7 +24,7 @@ function getMessage(req, res) {
       if (err) throw err;
       console.log(obj);
       res.json(obj); // this cast error crashes the server
-    } 
+    }
   );
 }
 
@@ -37,7 +36,7 @@ function getMessagesArray(req, res) {
       $or:
       [
         {'partId':partId}
-      ]    
+      ]
     }
     , 'id name description thingId personId latitude longitude image category altId'
     , function(err, obj) {
@@ -49,11 +48,11 @@ function getMessagesArray(req, res) {
 }
 
 function addMessage (req, res) {
-  console.log(req.body); // this works either in curl or express because mongoose is not involved. KLUDGE TODO
+  console.log(req.body); // this works either in curl or express because mongoose is not involved. HACK TODO
   Messages.create(req.body, function(err, obj) {
       if (err) throw err;
       var id = obj._id;
       console.log("created message id: " + id);
       res.json(obj);
   });
-}  
+}
