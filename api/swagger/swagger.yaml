@@ -480,7 +480,6 @@ definitions:
   newThing:
     type: object
     required:
-      - name
       - description
       - personId
     properties:
@@ -520,7 +519,6 @@ definitions:
   thing:
     type: object
     required:
-      - name
       - description
       - personId
     properties:

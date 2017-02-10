@@ -1,4 +1,4 @@
-// messageController
+// messageController DEPRECATED DO NOT USE. 
 'use strict';
 var mongoose = require('mongoose');
 var util = require('util');

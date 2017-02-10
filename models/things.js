@@ -11,7 +11,7 @@ Schema = mongoose.Schema;
 var thingSchema = new Schema({
     name: {
       type: String,
-      required: true
+      required: false
     },
     description: {
       type: String,
