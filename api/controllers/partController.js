@@ -120,7 +120,7 @@ function renderArray (req, res, thingId, personId, partType) {
       , function(err, obj) {
         if (err) throw err;
         if (obj) {
-          //console.log(obj);
+          // console.log(obj);
           res.json(obj);
         }
         else {
@@ -167,9 +167,9 @@ function getPartsArray(req, res) {
   POST /part
 ***************************************** */
 function addPart (req, res) {
-  console.log('I am posting a detail and the body is: ');
+  // console.log('I am posting a detail and the body is: ');
   console.log(req.body);
-  console.log('that was the body');
+  // console.log('that was the body');
   // in express you must pass json, in curl you must pass a string. HACK
   try {
     // this only works in express
