@@ -1,9 +1,18 @@
+
 const config = require('./config/config');
 const swaggerExpress = require('swagger-express-mw');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
+
+const dotenv = require('dotenv');
+
+/*
+  Load environment variables from .env file, where API keys and passwords are configured.
+*/
+dotenv.load({path: '.env.config'}); // NB: add to .gitignore
+console.log(process.env.MONGO_SECRET);
 
 const appRoot = { appRoot: __dirname };
 const app = express();
