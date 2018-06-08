@@ -1,5 +1,4 @@
 
-const config = require('./config/config');
 const swaggerExpress = require('swagger-express-mw');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -12,12 +11,15 @@ const dotenv = require('dotenv');
   Load environment variables from .env file, where API keys and passwords are configured.
 */
 dotenv.load({path: '.env.config'}); // NB: add to .gitignore
-console.log(process.env.MONGO_SECRET);
+console.log(process.env.MONGO_URL);
+
+const config = require('./config/config'); // TODO redundant; choose one or the other.
+console.log(config.mongoUrl);
 
 const appRoot = { appRoot: __dirname };
 const app = express();
 
-mongoose.connect(config.mongoUrl);
+mongoose.connect(process.env.MONGO_URL);
 
 app.use(bodyParser.json({ strict: false }));
 app.use(bodyParser.urlencoded({ extended: true }));
